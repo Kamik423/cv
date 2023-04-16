@@ -1,0 +1,128 @@
+% !TEX program = lualatex
+
+\documentclass[12pt,a4paper]{article}
+
+% Page Setup
+\usepackage[margin=0.75in]{geometry}
+\pagenumbering{gobble}
+
+% Font Setup
+\usepackage{fontspec}
+\usepackage{microtype}
+\setmainfont[Numbers={OldStyle,Proportional},SmallCapsFeatures={Numbers=OldStyle}]{Cochineal}
+\usepackage{fontawesome5}
+
+\let\oldtextsc\textsc
+\renewcommand\textsc[1]{\textls[30]{\oldtextsc{#1}}}
+
+% Multiple Columns
+\usepackage{paracol}
+\columnratio{0.5}
+\usepackage{changepage}
+
+% Shapes and Colors :)
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\definecolor{backgrounds}{HTML}{d0cde0} % {6c6ea0} % ffd900
+\definecolor{highlights}{HTML}{a63d40} % {f06449} % cd0000
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{tcolorbox}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage{todonotes}
+\usepackage[hidelinks]{hyperref}
+
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% Section style
+\usepackage[explicit]{titlesec}
+\titleformat{name=\section,numberless}[block]{\bfseries\large}{}{0pt}{#1}[{\color{highlights}\titlerule[1pt]}]
+
+% german
+\usepackage[english]{babel}
+
+% rounded corners
+% https://subscription.packtpub.com/book/hardware-and-creative/9781784395148/4/ch04lvl1sec45/cutting-an-image-to-get-rounded-corners
+\newsavebox{\picbox}
+\newcommand{\cutpic}[4][0 0 0 0]{
+    \savebox{\picbox}{\includegraphics[width=#3,clip,trim=#1]{#4}}
+    \tikz\node[draw,rounded corners=#2,line width=0pt,color=white,minimum width=\wd\picbox,minimum height=\ht\picbox,path picture={\node at (path picture bounding box.center) {\usebox{\picbox}};}] {};}
+
+\setlength{\parindent}{0pt}
+\begin{document}
+\newgeometry{margin=0.5in}
+% \columnratio{0.6}
+\columnratio{0.55}
+\renewcommand\arraystretch{1.2}
+\begin{paracol}{2}
+    \begin{minipage}[t][1in]{\columnwidth}
+        \centering
+        \fontsize{36pt}{42pt}\normalfont\textbf{Hans Schülein}\\
+        \vfill\LARGE\textcolor{highlights}{Curriculum Vitae}
+    \end{minipage}
+    \switchcolumn
+    % \begin{tcolorbox}[colback=backgrounds,colframe=backgrounds,boxrule=0mm,before skip=0pt,after skip=0pt,left skip=0pt, right skip=0pt,arc=0.2cm,boxsep=0em,height=2.25cm,left=0pt,top=0pt,bottom=0pt,valign=center] %,fontupper=\color{highlights}]
+    % \begin{tabular}{@{\hspace{0.4em}}c@{\hspace{0.4em}}l@{}}
+    \begin{minipage}[t][1in]{\columnwidth}
+        % \footnotesize
+        \renewcommand{\arraystretch}{1.0}
+        \begin{tabular}{@{}c@{\hspace{0.4em}}l@{}}
+            \faHome               & \symbol{75}\symbol{114}\symbol{111}\symbol{110}\symbol{101}\symbol{110}\symbol{115}\symbol{116}\symbol{114}\symbol{97}\symbol{223}\symbol{101}\symbol{32}\symbol{53}\symbol{44}\symbol{32}\symbol{55}\symbol{50}\symbol{48}\symbol{55}\symbol{48}\symbol{32}\symbol{84}\symbol{252}\symbol{98}\symbol{105}\symbol{110}\symbol{103}\symbol{101}\symbol{110}, \textsc{germany}                                                                                                                       \\
+            \faEnvelope           & \symbol{104}\symbol{97}\symbol{110}\symbol{115}\symbol{46}\symbol{115}\symbol{99}\symbol{104}\symbol{117}\symbol{101}\symbol{108}\symbol{101}\symbol{105}\symbol{110}\symbol{64}\symbol{115}\symbol{116}\symbol{117}\symbol{100}\symbol{45}\symbol{109}\symbol{97}\symbol{105}\symbol{108}\symbol{46}\symbol{117}\symbol{110}\symbol{105}\symbol{45}\symbol{119}\symbol{117}\symbol{101}\symbol{114}\symbol{122}\symbol{98}\symbol{117}\symbol{114}\symbol{103}\symbol{46}\symbol{100}\symbol{101} \\
+            \reflectbox{\faPhone} & \symbol{43}\symbol{52}\symbol{57}\symbol{32}\symbol{49}\symbol{53}\symbol{50}\symbol{32}\symbol{53}\symbol{51}\symbol{56}\symbol{48}\symbol{51}\symbol{57}\symbol{54}\symbol{55}                                                                                                                                                                                                                                                                                                                   \\
+            \faAsterisk           & November 24th 1997                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 \\
+            \faGithub             & github.com/Kamik423                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \\
+        \end{tabular}
+    \end{minipage}
+    % \end{tcolorbox}
+    ~\\
+    \switchcolumn*
+    \vspace{-\baselineskip}
+    \section*{Education}
+    \begin{tabularx}{\columnwidth}{@{}rX@{}}
+        2007--2016 & Markgraf-Georg-Friedrich-Gymnasium (\textsc{mgf}) high school in Kulmbach; Abitur 1.9 (\textsc{gpa} 3.1).                                                         \\
+        2013--2014 & High school study as senior at New Trier High School in Chicago, \textsc{usa} with \textsc{mgf} stipend.                                                          \\
+        2016--2020 & B.Sc.\@ in \textit{Aerospace Computer Science} at Julius-Maximilians-Universität (\textsc{jmu}) Würzburg; 180\,\textsc{ects}; Final grade 1.3 (\textsc{gpa} 3.7). \\
+        since 2020 & Master of \textit{Satellite Technology} at \textsc{jmu} Würzburg; Current grade 1.3 (\textsc{gpa} 3.7).
+    \end{tabularx}
+
+    \section*{Internships and Projects}
+    \begin{tabularx}{\columnwidth}{@{}rX@{}}
+        2015       & Regional victory at \textit{Jugend Forscht} for developing a Bluetooth \textsc{3d} computer mouse.                                                              \\
+        2016       & Programming a capsule reentry simulator for the science propaedeutical seminar at \textsc{mgf}.                                                                 \\
+        2016       & iOS app development work for \textit{ic-innovative software GmbH}.                                                                                              \\
+        2017--2019 & Developing printed circuit boards for \textit{\textsc{quest} on \textsc{bexus} 27} scientific stratospheric balloon.                                            \\
+        2020       & Bachelor's thesis writing a satellite ground station; ,,Building a Python Application for Recording a \textsc{corfu egse} Link``; Grade 1.0 (\textsc{gpa} 4.0). \\
+        2020--2021 & Research assistant at \textsc{jmu} for developing satellite ground station software.                                                                            \\
+        2020--2021 & Teaching assistant for \textit{Algorithmen und Datenstrukturen} (\textit{Algorithms and Data Structures}).                                                      \\
+        2020       & \textit{FloatSat Project} with air cushioned satellite simulators; Grade 1.0 (\textsc{gpa} 4.0).                                                                \\
+        2021       & \textit{Team Design Project} ,,Building an attitude control system on an air-bearing table``.                                                                   \\
+        since 2019 & Independent iOS app development ,,Hexer --- Hex File Viewer``.                                                                                                  \\
+        2022--2023 & Master's Thesis ,,Thermal Analysis of the \textsc{sonate}-2 NanoSatellite Mission``.                                                                            \\
+        since 2022 & Working student for \textsc{vba} development at \textit{SySS GmbH}.
+    \end{tabularx}
+
+    \switchcolumn%
+    \cutpic[0 0 0 0]{0.2cm}{\columnwidth}{profile-pictures/thin}
+
+    \section*{Technical Abilities}
+    \begin{tabularx}{\columnwidth}{@{}rX@{}}
+        % \begin{tabularx}{\columnwidth}{@{}rX@{}}
+        Programming          & Python, Swift, C/C++, \textsc{vba}, Java, \textsc{matlab}, Embedded;             \\
+        \textsc{3d}-Software & Fusion 360, Blender, Prusa Slicer.                                               \\
+        Other Software       & \LaTeX, Various Image Editing and Graphics Apps.                                 \\
+        Hardware             & \textsc{3d}-Printer, \textsc{pcb} Design and Placement, Soldering, Raspberry Pi.
+    \end{tabularx}
+
+    \section*{Languages}
+    \begin{tabularx}{\columnwidth}{@{}rX@{}}
+        German  & Native.                                                          \\
+        English & \textsc{b}2+/\textsc{c}1; One year of study in the \textsc{usa}. \\
+        Latin   & Latin Proficiency Certificate.                                   \\
+        Spanish & \textsc{a}1.
+    \end{tabularx}
+\end{paracol}
+\end{document}

@@ -1,0 +1,128 @@
+% !TEX program = lualatex
+
+\documentclass[12pt,a4paper]{article}
+
+% Page Setup
+\usepackage[margin=0.75in]{geometry}
+\pagenumbering{gobble}
+
+% Font Setup
+\usepackage{fontspec}
+\usepackage{microtype}
+\setmainfont[Numbers={OldStyle,Proportional},SmallCapsFeatures={Numbers=OldStyle,Scale=1.1}]{Cochineal}
+\usepackage{fontawesome5}
+
+\let\oldtextsc\textsc
+\renewcommand\textsc[1]{\textls[10]{\oldtextsc{#1}}}
+
+% Multiple Columns
+\usepackage{paracol}
+\columnratio{0.5}
+\usepackage{changepage}
+
+% Shapes and Colors :)
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\definecolor{backgrounds}{HTML}{d0cde0} % {6c6ea0} % ffd900
+\definecolor{highlights}{HTML}{a63d40} % {f06449} % cd0000
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{tcolorbox}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage{todonotes}
+\usepackage[hidelinks]{hyperref}
+
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% Section style
+\usepackage[explicit]{titlesec}
+\titleformat{name=\section,numberless}[block]{\bfseries\large}{}{0pt}{#1}[{\color{highlights}\titlerule[1pt]}]
+
+% german
+\usepackage[ngerman]{babel}
+
+% rounded corners
+% https://subscription.packtpub.com/book/hardware-and-creative/9781784395148/4/ch04lvl1sec45/cutting-an-image-to-get-rounded-corners
+\newsavebox{\picbox}
+\newcommand{\cutpic}[4][0 0 0 0]{
+    \savebox{\picbox}{\includegraphics[width=#3,clip,trim=#1]{#4}}
+    \tikz\node[draw,rounded corners=#2,line width=0pt,color=white,minimum width=\wd\picbox,minimum height=\ht\picbox,path picture={\node at (path picture bounding box.center) {\usebox{\picbox}};}] {};}
+
+\setlength{\parindent}{0pt}
+\begin{document}
+\newgeometry{margin=0.5in}
+% \columnratio{0.6}
+\columnratio{0.55}
+\renewcommand\arraystretch{1.2}
+\begin{paracol}{2}
+    \begin{minipage}[t][1in]{\columnwidth}
+        \centering
+        \fontsize{36pt}{42pt}\normalfont\textbf{Hans Schülein}\\
+        \vfill\LARGE\textcolor{highlights}{Lebenslauf}
+    \end{minipage}
+    \switchcolumn
+    % \begin{tcolorbox}[colback=backgrounds,colframe=backgrounds,boxrule=0mm,before skip=0pt,after skip=0pt,left skip=0pt, right skip=0pt,arc=0.2cm,boxsep=0em,height=2.25cm,left=0pt,top=0pt,bottom=0pt,valign=center] %,fontupper=\color{highlights}]
+    % \begin{tabular}{@{\hspace{0.4em}}c@{\hspace{0.4em}}l@{}}
+    \begin{minipage}[t][1in]{\columnwidth}
+        % \footnotesize
+        \renewcommand{\arraystretch}{1.0}
+        \begin{tabular}{@{}c@{\hspace{0.4em}}l@{}}
+            \faHome               & \symbol{75}\symbol{114}\symbol{111}\symbol{110}\symbol{101}\symbol{110}\symbol{115}\symbol{116}\symbol{114}\symbol{97}\symbol{223}\symbol{101}\symbol{32}\symbol{53}\symbol{44}\symbol{32}\symbol{55}\symbol{50}\symbol{48}\symbol{55}\symbol{48}\symbol{32}\symbol{84}\symbol{252}\symbol{98}\symbol{105}\symbol{110}\symbol{103}\symbol{101}\symbol{110}                                                                                                                                         \\
+            \faEnvelope           & \symbol{104}\symbol{97}\symbol{110}\symbol{115}\symbol{46}\symbol{115}\symbol{99}\symbol{104}\symbol{117}\symbol{101}\symbol{108}\symbol{101}\symbol{105}\symbol{110}\symbol{64}\symbol{115}\symbol{116}\symbol{117}\symbol{100}\symbol{45}\symbol{109}\symbol{97}\symbol{105}\symbol{108}\symbol{46}\symbol{117}\symbol{110}\symbol{105}\symbol{45}\symbol{119}\symbol{117}\symbol{101}\symbol{114}\symbol{122}\symbol{98}\symbol{117}\symbol{114}\symbol{103}\symbol{46}\symbol{100}\symbol{101} \\
+            \reflectbox{\faPhone} & \symbol{43}\symbol{52}\symbol{57}\symbol{32}\symbol{49}\symbol{53}\symbol{50}\symbol{32}\symbol{53}\symbol{51}\symbol{56}\symbol{48}\symbol{51}\symbol{57}\symbol{54}\symbol{55}                                                                                                                                                                                                                                                                                                                   \\
+            \faAsterisk           & 24. November 1997                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  \\
+            \faGithub             & github.com/Kamik423                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \\
+        \end{tabular}
+    \end{minipage}
+    % \end{tcolorbox}
+    ~\\
+    \switchcolumn*
+    \vspace{-\baselineskip}
+    \section*{Ausbildung}
+    \begin{tabularx}{\columnwidth}{@{}rX@{}}
+        2007--2016 & Markgraf-Georg-Friedrich-Gymnasium (\textsc{mgf}) in Kulmbach; Abitur 1,9.                                                                                 \\
+        2013--2014 & Auslandsjahr als \textit{senior} an der New Trier High School in Chicago, \textsc{usa} mit Stipendium des \textsc{mgf}.                                    \\
+        2016--2020 & B.Sc.\@ in \textit{Luft- und Raumfahrtinformatik} in an der Julius-Maximilians-Universität (\textsc{jmu}) Würzburg; 180\,\textsc{ects}; Abschlussnote 1,3. \\
+        seit 2020  & Master \textit{Satellite Technology} an der \textsc{jmu} Würzburg; aktuelle Note 1,3.
+    \end{tabularx}
+
+    \section*{Praktika und Projekte}
+    \begin{tabularx}{\columnwidth}{@{}rX@{}}
+        2015       & Regionalsieg bei Jugend Forscht für die Entwicklung einer Bluetooth \textsc{3d}-Computermaus.                                                                  \\
+        2016       & Programmieren eines Kapselwiedereintrittssimulators für das wissenschaftspropädeutische Seminar am \textsc{mgf}.                                               \\
+        2016       & Arbeit mit iOS-Appentwicklung bei der \textit{ic-innovative software GmbH}.                                                                                    \\
+        2017--2019 & Entwicklung von Platinen für \textit{\textsc{quest} on \textsc{bexus} 27} Forschungsprojekt auf einem Stratosphärenballon.                                     \\
+        2020       & Bachelorarbeit für Entwicklung von Bodenstationssoftware für Satelliten; ,,Building a Python Application for Recording a \textsc{corfu egse} Link``; Note 1,0. \\
+        2020--2021 & Wissenschaftliche Hilfskraft an der \textsc{jmu} für Entwicklung von Bodenstationssoftware für Satelliten.                                                     \\
+        2020--2021 & Übungsleiter und Übungsblattkorrektur im Kurs \textit{Algorithmen und Datenstrukturen}.                                                                        \\
+        2020       & \textit{FloatSat Project} mit luftgepolsterten Satellitensimulatoren; Note 1,0.                                                                                \\
+        2021       & \textit{Team Design Project} ,,Building an attitude control system on an air-bearing table``.                                                                  \\
+        seit 2019  & Selbstständige iOS-Appentwicklung ,,Hexer --- Hex File Viewer``.                                                                                               \\
+        2022--2023 & Masterarbeit ,,Thermal Analysis of the \textsc{sonate}-2 NanoSatellite Mission``.                                                                              \\
+        seit 2022  & Werkstudentenstelle für \textsc{vba}-Entwicklung bei der \textit{SySS GmbH}.
+    \end{tabularx}
+
+    \switchcolumn%
+    \cutpic[0 0 0 0]{0.2cm}{\columnwidth}{profile-pictures/thin}
+
+    \section*{Technische Fähigkeiten}
+    % \begin{tabularx}{\columnwidth}{@{}R{\widthof{Programmier-}}X@{}}
+    \begin{tabularx}{\columnwidth}{@{}rX@{}}
+        Programmierung       & Python, Swift, C/C++, Java, \textsc{vba}, \textsc{matlab}, Embedded;            \\
+        \textsc{3d}-Software & Fusion 360, Blender, Prusa Slicer.                                              \\
+        Sonstige Software    & \LaTeX, verschiedene Bild\-be\-ar\-bei\-tungs- und Zeichenapps.                 \\
+        Hardware             & \textsc{3d}-Drucker, Platinen\-design und -be\-stü\-ckung, Löten, Raspberry Pi.
+    \end{tabularx}
+
+    \section*{Sprachen}
+    \begin{tabularx}{\columnwidth}{@{}rX@{}}
+        Deutsch  & Muttersprachlich.                                                  \\
+        Englisch & \textsc{b}2+/\textsc{c}1; Ein Jahr Aufenthalt in den \textsc{usa}. \\
+        Latein   & Latinum.                                                           \\
+        Spanisch & \textsc{a}1.
+    \end{tabularx}
+\end{paracol}
+\end{document}
